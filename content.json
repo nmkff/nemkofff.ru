@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "title": "Студент. Разработчик.\nВолонтёр.",
+    "subtitle": "Студент КузГТУ. Пишу ботов, поднимаю серверы, волонтёрю. Амбассадор Goodline.",
+    "buttons": [
+      { "text": "Блог в ТГ", "url": "https://t.me/nemkofff", "style": "solid" },
+      { "text": "Написать", "url": "https://t.me/iamnemkofff", "style": "outline" },
+      { "text": "ВКонтакте", "url": "https://vk.com/id215468423", "style": "outline" }
+    ]
+  },
+  "about": {
+    "paragraphs": [
+      "Студент <strong>института профессионального образования КузГТУ им. Т.Ф. Горбачева</strong>, направление — информационные системы.",
+      "Занимаюсь backend-разработкой: пишу ботов для Telegram и ВКонтакте, разворачиваю серверы, настраиваю проксирование и SSL. Участвовал в региональных хакатонах.",
+      "Параллельно волонтёрю и являюсь <strong>амбассадором Goodline</strong>."
+    ]
+  },
+  "projects": [
+    { "emoji": "🤖", "name": "Навигатор КузГТУ", "desc": "ВК-бот для абитуриентов — мониторинг рейтинговых списков и уведомления об изменениях в реальном времени", "tags": ["Python", "vk-api", "PyMuPDF"] },
+    { "emoji": "💼", "name": "Карьерный бот", "desc": "Хакатон-проект: Telegram-бот для профориентации с поиском вакансий через hh.ru и подбором курсов", "tags": ["aiogram", "GigaChat", "hh.ru API"] },
+    { "emoji": "🔐", "name": "Сисадминство", "desc": "Свой VPS: настройка сервисов, SSL, проксирование, мониторинг — в общем всё что нужно чтоб работало", "tags": ["Linux", "3X-UI", "Cloudflare"] },
+    { "emoji": "🌐", "name": "Этот сайт", "desc": "Ну вот он. GitHub Pages, Cloudflare, немного вайба", "tags": ["HTML", "CSS", "GitHub Pages"] }
+  ],
+  "featured": [
+    {
+      "category": "В рамках универа",
+      "items": [
+        { "source": "kuzstu.ru · 2025", "title": "Студенты ИПО создали AI-агента для карьерной навигации", "desc": "Хакатон-проект: Telegram-бот для профориентации с поиском вакансий и подбором курсов через ИИ", "url": "https://kuzstu.ru/news/9231/studenty-ipo-sozdali-ai-agenta-dlya-karernoy-navigacii/" },
+        { "source": "kuzstu.ru · 2025", "title": "В КузГТУ подвели итоги студенческой научной сессии 2025", "desc": "Итоги научной сессии — представил проект «Навигатор КузГТУ»", "url": "https://kuzstu.ru/news/9094/v-kuzgtu-podveli-itogi-studencheskoy-nauchnoy-sessii-2025/" },
+        { "source": "kuzstu.ru · 2025", "title": "Победы и призовые места ИПО на олимпиаде «Техновызов»", "desc": "Призовое место на олимпиаде среди студентов технических специальностей", "url": "https://kuzstu.ru/news/8963/pobedy-i-prizovye-mesta-instituta-professionalnogo-obrazovaniya-na-olimpiade-tehnovyzov/" }
+      ]
+    }
+  ]
+}

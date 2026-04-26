@@ -7,249 +7,82 @@
     <meta name="description" content="Студент КузГТУ. Волонтер, вебмастер, амбассадор Goodline.">
     <base href=".">
     <link rel="icon" type="image/x-icon" href="https://teletype.link/dist/assets/favicon.png">
-    <!-- Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter -->
 <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(94608759, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-   });
+   ym(94608759, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/94608759" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 <!-- /Yandex.Metrika counter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;700&display=swap" rel="stylesheet">
-
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
+        body { background: #0d0010; color: #f0ece4; font-family: 'Onest', sans-serif; font-weight: 300; }
 
-        body {
-            background: #111;
-            color: #f0ece4;
-            font-family: 'Onest', sans-serif;
-            font-weight: 300;
-        }
+        .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: clamp(2rem, 6vw, 4rem); overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('./ivan_files/bck.webp') center 20% / cover no-repeat; filter: brightness(0.35); }
+        .hero-fade { position: absolute; inset: 0; background: linear-gradient(to top, #0d0010 0%, #0d0010 8%, rgba(13,0,16,0.5) 55%); }
+        .hero-content { position: relative; max-width: 640px; }
+        .hero-name { font-family: 'Onest', sans-serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+        .hero-sub { font-size: 0.9rem; color: rgba(240,236,228,0.55); line-height: 1.7; max-width: 380px; margin-bottom: 2.5rem; }
+        .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-        /* ─── HERO ─── */
-        .hero {
-            position: relative;
-            min-height: 100svh;
-            display: flex;
-            align-items: flex-end;
-            padding: clamp(2rem, 6vw, 4rem);
-            overflow: hidden;
-        }
+        .btn { font-family: 'Onest', sans-serif; font-size: 0.8rem; font-weight: 400; padding: 0.6rem 1.25rem; border-radius: 100px; text-decoration: none; transition: all 0.2s; letter-spacing: 0.01em; }
+        .btn-solid { background: #c94fff; color: #fff; }
+        .btn-solid:hover { background: #d96fff; }
+        .btn-outline { border: 1px solid rgba(240,236,228,0.25); color: rgba(240,236,228,0.75); }
+        .btn-outline:hover { border-color: rgba(240,236,228,0.6); color: #f0ece4; }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: url('./ivan_files/bck.webp') center 20% / cover no-repeat;
-            filter: brightness(0.35);
-        }
+        .wrap { max-width: 640px; margin: 0 auto; padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 4rem); }
+        .section-label { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: #c94fff; margin-bottom: 2rem; }
+        .section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; }
 
-        .hero-fade {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, #111 0%, #111 10%, transparent 55%);
-        }
-
-        .hero-content {
-            position: relative;
-            max-width: 640px;
-        }
-
-        .hero-name {
-            font-family: 'Onest', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-sub {
-            font-size: 0.9rem;
-            color: rgba(240,236,228,0.55);
-            line-height: 1.7;
-            max-width: 380px;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-links {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            font-family: 'Onest', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 400;
-            padding: 0.6rem 1.25rem;
-            border-radius: 100px;
-            text-decoration: none;
-            transition: all 0.2s;
-            letter-spacing: 0.01em;
-        }
-        .btn-solid {
-            background: #f0ece4;
-            color: #111;
-        }
-        .btn-solid:hover { background: #fff; }
-        .btn-outline {
-            border: 1px solid rgba(240,236,228,0.25);
-            color: rgba(240,236,228,0.75);
-        }
-        .btn-outline:hover {
-            border-color: rgba(240,236,228,0.6);
-            color: #f0ece4;
-        }
-
-        /* ─── SECTIONS ─── */
-        .wrap {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 4rem);
-        }
-
-        .section-label {
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #c9a96e;
-            margin-bottom: 2rem;
-        }
-
-        /* ─── ABOUT ─── */
         .about-wrap { border-top: 1px solid rgba(240,236,228,0.08); }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-        @media (max-width: 500px) {
-            .about-grid { grid-template-columns: 1fr; }
-        }
-
-        .avatar-ring {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            padding: 2px;
-            background: linear-gradient(135deg, #c9a96e, #8a6a3a);
-        }
-        .avatar-ring img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 2px solid #111;
-        }
-
-        .about-body p {
-            font-size: 0.92rem;
-            color: rgba(240,236,228,0.6);
-            line-height: 1.8;
-            margin-bottom: 0.75rem;
-        }
+        .about-grid { display: grid; grid-template-columns: 100px 1fr; gap: 2rem; align-items: start; }
+        @media (max-width: 500px) { .about-grid { grid-template-columns: 1fr; } }
+        .avatar-ring { width: 100px; height: 100px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg, #ff4daa, #c94fff); }
+        .avatar-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: 2px solid #0d0010; }
+        .about-body p { font-size: 0.92rem; color: rgba(240,236,228,0.6); line-height: 1.8; margin-bottom: 0.75rem; }
         .about-body p:last-child { margin-bottom: 0; }
         .about-body strong { color: #f0ece4; font-weight: 500; }
 
-        /* ─── PROJECTS ─── */
         .projects-wrap { border-top: 1px solid rgba(240,236,228,0.08); }
-
-        .proj-list { display: flex; flex-direction: column; gap: 1px; }
-
-        .proj-item {
-            display: grid;
-            grid-template-columns: 2.5rem 1fr auto;
-            align-items: center;
-            gap: 1.25rem;
-            padding: 1.25rem 0;
-            border-bottom: 1px solid rgba(240,236,228,0.06);
-            transition: background 0.15s;
-        }
-
+        .proj-list { display: flex; flex-direction: column; }
+        .proj-item { display: grid; grid-template-columns: 2.5rem 1fr auto; align-items: center; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid rgba(240,236,228,0.06); }
         .proj-emoji { font-size: 1.4rem; text-align: center; }
+        .proj-name { font-size: 0.95rem; font-weight: 500; color: #f0ece4; margin-bottom: 0.2rem; }
+        .proj-desc { font-size: 0.78rem; color: rgba(240,236,228,0.4); line-height: 1.5; }
+        .proj-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; justify-content: flex-end; }
+        .proj-tag { font-size: 0.65rem; padding: 0.2rem 0.55rem; border-radius: 100px; border: 1px solid rgba(240,236,228,0.12); color: rgba(240,236,228,0.4); white-space: nowrap; }
+        @media (max-width: 480px) { .proj-item { grid-template-columns: 2rem 1fr; } .proj-tags { display: none; } }
 
-        .proj-info {}
-        .proj-name {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #f0ece4;
-            margin-bottom: 0.2rem;
-        }
-        .proj-desc {
-            font-size: 0.78rem;
-            color: rgba(240,236,228,0.4);
-            line-height: 1.5;
-        }
+        .featured-wrap { border-top: 1px solid rgba(240,236,228,0.08); }
+        .featured-category { margin-bottom: 2.5rem; }
+        .featured-category-title { font-size: 1rem; font-weight: 500; color: #f0ece4; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(240,236,228,0.06); }
+        .featured-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+        .featured-card { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1.25rem; border: 1px solid rgba(240,236,228,0.08); border-radius: 10px; text-decoration: none; transition: all 0.2s; background: rgba(240,236,228,0.02); }
+        .featured-card:hover { border-color: rgba(240,236,228,0.2); background: rgba(240,236,228,0.04); transform: translateY(-2px); }
+        .featured-card-body { flex: 1; }
+        .featured-source { font-size: 0.68rem; color: #c94fff; margin-bottom: 0.4rem; }
+        .featured-card-title { font-size: 0.875rem; font-weight: 500; color: #f0ece4; line-height: 1.4; margin-bottom: 0.5rem; }
+        .featured-card-desc { font-size: 0.75rem; color: rgba(240,236,228,0.35); line-height: 1.5; }
+        .featured-arrow { font-size: 1rem; color: rgba(240,236,228,0.2); flex-shrink: 0; transition: color 0.2s; }
+        .featured-card:hover .featured-arrow { color: #c94fff; }
 
-        .proj-tags {
-            display: flex;
-            gap: 0.3rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-        .proj-tag {
-            font-size: 0.65rem;
-            padding: 0.2rem 0.55rem;
-            border-radius: 100px;
-            border: 1px solid rgba(240,236,228,0.12);
-            color: rgba(240,236,228,0.4);
-            white-space: nowrap;
-        }
-        @media (max-width: 480px) {
-            .proj-item { grid-template-columns: 2rem 1fr; }
-            .proj-tags { display: none; }
-        }
-
-        /* ─── FOOTER ─── */
-        .footer {
-            border-top: 1px solid rgba(240,236,228,0.08);
-            padding: 2rem clamp(1.5rem, 6vw, 4rem);
-            max-width: 640px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-        .footer-copy {
-            font-size: 0.75rem;
-            color: rgba(240,236,228,0.25);
-        }
-        .footer-links {
-            display: flex;
-            gap: 1rem;
-        }
-        .footer-links a {
-            font-size: 0.75rem;
-            color: rgba(240,236,228,0.25);
-            text-decoration: none;
-            transition: color 0.15s;
-        }
+        .footer { border-top: 1px solid rgba(240,236,228,0.08); padding: 2rem clamp(1.5rem, 6vw, 4rem); max-width: 640px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+        .footer-copy { font-size: 0.75rem; color: rgba(240,236,228,0.25); }
+        .footer-links { display: flex; gap: 1rem; }
+        .footer-links a { font-size: 0.75rem; color: rgba(240,236,228,0.25); text-decoration: none; transition: color 0.15s; }
         .footer-links a:hover { color: rgba(240,236,228,0.6); }
 
-        /* ─── REVEAL ─── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
         .reveal.on { opacity: 1; transform: none; }
     </style>
 </head>
@@ -258,17 +91,10 @@
 <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-fade"></div>
-    <div class="hero-content">
-        <h1 class="hero-name">Студент. Разработчик.<br>Волонтёр.</h1>
-        <p class="hero-sub">
-            Студент КузГТУ. Пишу ботов, поднимаю серверы, волонтёрю.
-            Амбассадор Goodline.
-        </p>
-        <div class="hero-links">
-            <a href="https://t.me/nemkofff" target="_blank" class="btn btn-solid">Блог в ТГ</a>
-            <a href="https://t.me/iamnemkofff" target="_blank" class="btn btn-outline">Написать</a>
-            <a href="https://vk.com/id215468423" target="_blank" class="btn btn-outline">ВКонтакте</a>
-        </div>
+    <div class="hero-content" id="hero-content">
+        <h1 class="hero-name" id="hero-name"></h1>
+        <p class="hero-sub" id="hero-sub"></p>
+        <div class="hero-links" id="hero-links"></div>
     </div>
 </section>
 
@@ -279,11 +105,7 @@
             <div class="avatar-ring">
                 <img src="./ivan_files/avatar.webp" alt="Немков Иван">
             </div>
-            <div class="about-body">
-                <p>Студент <strong>института профессионального образования КузГТУ им. Т.Ф. Горбачева</strong>, направление — информационные системы и программирование.</p>
-                <p>Занимаюсь backend-разработкой: пишу ботов для Telegram и ВКонтакте, разворачиваю серверы, настраиваю проксирование и SSL. Участвовал в региональных хакатонах.</p>
-                <p>Параллельно волонтёрю и являюсь <strong>амбассадором Goodline</strong>.</p>
-            </div>
+            <div class="about-body" id="about-body"></div>
         </div>
     </div>
 </div>
@@ -291,56 +113,14 @@
 <div class="projects-wrap">
     <div class="wrap">
         <p class="section-label reveal">Проекты</p>
-        <div class="proj-list">
-            <div class="proj-item reveal">
-                <div class="proj-emoji">🤖</div>
-                <div class="proj-info">
-                    <div class="proj-name">Навигатор КузГТУ</div>
-                    <div class="proj-desc">ВК-бот для абитуриентов и студентов — мониторинг рейтинговых списков и уведомления об изменениях в расписании пар в реальном времени</div>
-                </div>
-                <div class="proj-tags">
-                    <span class="proj-tag">Python</span>
-                    <span class="proj-tag">vk-api</span>
-                    <span class="proj-tag">PyMuPDF</span>
-                </div>
-            </div>
-            <div class="proj-item reveal">
-                <div class="proj-emoji">💼</div>
-                <div class="proj-info">
-                    <div class="proj-name">Карьерный бот</div>
-                    <div class="proj-desc">Хакатон-проект: Telegram-бот для профориентации с поиском вакансий через hh.ru и подбором курсов</div>
-                </div>
-                <div class="proj-tags">
-                    <span class="proj-tag">aiogram</span>
-                    <span class="proj-tag">GigaChat</span>
-                    <span class="proj-tag">hh.ru API</span>
-                </div>
-            </div>
-            <div class="proj-item reveal">
-                <div class="proj-emoji">🔐</div>
-                <div class="proj-info">
-                    <div class="proj-name">Сисадминство</div>
-                    <div class="proj-desc">Свой VPS: настройка сервисов, SSL, проксирование, мониторинг — в общем всё что нужно чтоб работало</div>
-                </div>
-                <div class="proj-tags">
-                    <span class="proj-tag">Linux</span>
-                    <span class="proj-tag">3X-UI</span>
-                    <span class="proj-tag">Cloudflare</span>
-                </div>
-            </div>
-            <div class="proj-item reveal">
-                <div class="proj-emoji">🌐</div>
-                <div class="proj-info">
-                    <div class="proj-name">Этот сайт</div>
-                    <div class="proj-desc">Ну вот он. GitHub Pages, Cloudflare, завайбкоден(мог бы и сам, но ладно)</div>
-                </div>
-                <div class="proj-tags">
-                    <span class="proj-tag">HTML</span>
-                    <span class="proj-tag">CSS</span>
-                    <span class="proj-tag">GitHub Pages</span>
-                </div>
-            </div>
-        </div>
+        <div class="proj-list reveal" id="proj-list"></div>
+    </div>
+</div>
+
+<div class="featured-wrap">
+    <div class="wrap">
+        <p class="section-label reveal">Где засветился?</p>
+        <div id="featured-root"></div>
     </div>
 </div>
 
@@ -353,11 +133,58 @@
 </footer>
 
 <script>
-const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
+async function render() {
+    const d = await fetch('./content.json?v=' + Date.now()).then(r => r.json());
 
+    // Hero
+    document.getElementById('hero-name').innerHTML = d.hero.title.replace('\n', '<br>');
+    document.getElementById('hero-sub').textContent = d.hero.subtitle;
+    document.getElementById('hero-links').innerHTML = d.hero.buttons.map(b =>
+        `<a href="${b.url}" target="_blank" class="btn btn-${b.style}">${b.text}</a>`
+    ).join('');
+
+    // About
+    document.getElementById('about-body').innerHTML = d.about.paragraphs.map(p =>
+        `<p>${p}</p>`
+    ).join('');
+
+    // Projects
+    document.getElementById('proj-list').innerHTML = d.projects.map(p =>
+        `<div class="proj-item reveal">
+            <div class="proj-emoji">${p.emoji}</div>
+            <div class="proj-info">
+                <div class="proj-name">${p.name}</div>
+                <div class="proj-desc">${p.desc}</div>
+            </div>
+            <div class="proj-tags">${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}</div>
+        </div>`
+    ).join('');
+
+    // Featured
+    document.getElementById('featured-root').innerHTML = d.featured.map(cat =>
+        `<div class="featured-category reveal">
+            <div class="featured-category-title">${cat.category}</div>
+            <div class="featured-grid">${cat.items.map(item =>
+                `<a href="${item.url}" target="_blank" class="featured-card">
+                    <div class="featured-card-body">
+                        <div class="featured-source">${item.source}</div>
+                        <div class="featured-card-title">${item.title}</div>
+                        <div class="featured-card-desc">${item.desc}</div>
+                    </div>
+                    <div class="featured-arrow">↗</div>
+                </a>`
+            ).join('')}</div>
+        </div>`
+    ).join('');
+
+    // Reveal observer
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+render();
+</script>
 </body>
 </html>

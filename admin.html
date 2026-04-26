@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Админка — nemkofff.ru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Onest', sans-serif; background: #0f0f13; color: #e2e2ee; font-size: 14px; }
+
+        /* LOGIN */
+        .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+        .login-card { background: #1a1a24; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 2rem; width: 100%; max-width: 380px; }
+        .login-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .login-sub { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; line-height: 1.5; }
+        .login-sub a { color: #c94fff; text-decoration: none; }
+
+        /* LAYOUT */
+        .app { display: none; grid-template-columns: 220px 1fr; min-height: 100vh; }
+        .app.show { display: grid; }
+
+        /* SIDEBAR */
+        .sidebar { background: #13131a; border-right: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; }
+        .sidebar-logo { padding: 1.25rem 1rem; font-weight: 700; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.06); color: #c94fff; }
+        .sidebar-logo span { color: rgba(255,255,255,0.4); font-weight: 300; }
+        .nav { flex: 1; padding: 0.75rem 0; }
+        .nav-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 1rem; font-size: 0.85rem; color: rgba(255,255,255,0.5); cursor: pointer; border-radius: 0; transition: all 0.15s; border-left: 2px solid transparent; }
+        .nav-item:hover { color: #e2e2ee; background: rgba(255,255,255,0.03); }
+        .nav-item.active { color: #e2e2ee; background: rgba(201,79,255,0.08); border-left-color: #c94fff; }
+        .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+        .sidebar-footer { padding: 1rem; border-top: 1px solid rgba(255,255,255,0.06); }
+        .site-link { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; text-align: center; }
+        .site-link:hover { color: #c94fff; }
+
+        /* MAIN */
+        .main { overflow-y: auto; }
+        .page { display: none; padding: 2rem; max-width: 700px; }
+        .page.active { display: block; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .page-title { font-size: 1.2rem; font-weight: 700; }
+
+        /* FORM ELEMENTS */
+        label { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-bottom: 0.35rem; letter-spacing: 0.04em; }
+        input[type=text], input[type=url], textarea, select {
+            width: 100%; background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+            padding: 0.6rem 0.75rem; color: #e2e2ee; font-family: 'Onest', sans-serif; font-size: 0.85rem;
+            transition: border-color 0.15s; resize: vertical;
+        }
+        input[type=text]:focus, input[type=url]:focus, textarea:focus { outline: none; border-color: #c94fff; }
+        textarea { min-height: 80px; line-height: 1.5; }
+        .field { margin-bottom: 1.1rem; }
+
+        /* BUTTONS */
+        .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem; border-radius: 8px; font-family: 'Onest', sans-serif; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.15s; border: none; }
+        .btn-primary { background: #c94fff; color: #fff; }
+        .btn-primary:hover { background: #d96fff; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #e2e2ee; }
+        .btn-danger { background: rgba(255,80,80,0.15); color: #ff8080; border: 1px solid rgba(255,80,80,0.2); }
+        .btn-danger:hover { background: rgba(255,80,80,0.25); }
+        .btn-sm { padding: 0.35rem 0.7rem; font-size: 0.75rem; }
+
+        /* CARDS */
+        .card { background: #1a1a24; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; gap: 1rem; }
+        .card-title { font-size: 0.9rem; font-weight: 500; }
+        .card-actions { display: flex; gap: 0.4rem; flex-shrink: 0; }
+
+        /* ADD BUTTON */
+        .add-card { border: 1px dashed rgba(255,255,255,0.12); border-radius: 10px; padding: 1rem; text-align: center; cursor: pointer; color: rgba(255,255,255,0.3); font-size: 0.85rem; transition: all 0.15s; margin-bottom: 1rem; }
+        .add-card:hover { border-color: #c94fff; color: #c94fff; background: rgba(201,79,255,0.04); }
+
+        /* TAGS INPUT */
+        .tags-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+        .tag-pill { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; padding: 0.2rem 0.6rem; border-radius: 100px; background: rgba(201,79,255,0.15); border: 1px solid rgba(201,79,255,0.3); color: #c94fff; }
+        .tag-pill button { background: none; border: none; color: inherit; cursor: pointer; padding: 0; line-height: 1; font-size: 0.8rem; }
+
+        /* STATUS */
+        .toast { position: fixed; bottom: 1.5rem; right: 1.5rem; background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem 1.25rem; font-size: 0.85rem; z-index: 999; transform: translateY(100px); opacity: 0; transition: all 0.3s; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-color: rgba(80,255,150,0.3); color: #80ffaa; }
+        .toast.error { border-color: rgba(255,80,80,0.3); color: #ff8080; }
+
+        /* CATEGORY HEADER */
+        .cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+        .cat-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+        /* DIVIDER */
+        hr { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 1.5rem 0; }
+
+        /* MODAL */
+        .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-bg.show { display: flex; }
+        .modal { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; width: 100%; max-width: 460px; }
+        .modal-title { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; }
+        .modal-footer { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.25rem; }
+
+        /* SECTION TITLE input */
+        .section-header-edit { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1.5rem; }
+        .section-header-edit input { font-size: 1.1rem; font-weight: 700; flex: 1; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+    <div class="login-card">
+        <div class="login-title">Админка nemkofff.ru</div>
+        <div class="login-sub">
+            Нужен GitHub Personal Access Token с правами <code>repo</code>.<br>
+            <a href="https://github.com/settings/tokens/new?scopes=repo&description=nemkofff-admin" target="_blank">Создать токен →</a>
+        </div>
+        <div class="field"><label>GitHub токен</label><input type="text" id="token-input" placeholder="ghp_..."></div>
+        <div class="field"><label>Репозиторий</label><input type="text" id="repo-input" placeholder="username/nemkofff.ru"></div>
+        <div class="field"><label>Ветка</label><input type="text" id="branch-input" value="main"></div>
+        <button class="btn btn-primary" onclick="login()" style="width:100%">Войти</button>
+        <div id="login-error" style="color:#ff8080;font-size:0.8rem;margin-top:0.75rem;display:none;"></div>
+    </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+    <div class="sidebar">
+        <div class="sidebar-logo">nemkofff<span>.ru</span></div>
+        <nav class="nav">
+            <div class="nav-item active" onclick="showPage('hero')"><span class="nav-icon">🏠</span> Главная</div>
+            <div class="nav-item" onclick="showPage('about')"><span class="nav-icon">👤</span> О себе</div>
+            <div class="nav-item" onclick="showPage('projects')"><span class="nav-icon">🛠</span> Проекты</div>
+            <div class="nav-item" onclick="showPage('featured')"><span class="nav-icon">⭐</span> Где засветился</div>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/" class="site-link" target="_blank">↗ Открыть сайт</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <!-- HERO -->
+        <div class="page active" id="page-hero">
+            <div class="page-header">
+                <div class="page-title">Главная</div>
+                <button class="btn btn-primary" onclick="saveSection('hero')">💾 Сохранить</button>
+            </div>
+            <div class="field"><label>Заголовок (перенос строки — \n)</label><input type="text" id="hero-title"></div>
+            <div class="field"><label>Подзаголовок</label><textarea id="hero-subtitle"></textarea></div>
+            <hr>
+            <div class="cat-label" style="margin-bottom:0.75rem;">Кнопки</div>
+            <div id="hero-buttons"></div>
+            <div class="add-card" onclick="addHeroButton()">+ добавить кнопку</div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="page" id="page-about">
+            <div class="page-header">
+                <div class="page-title">О себе</div>
+                <button class="btn btn-primary" onclick="saveSection('about')">💾 Сохранить</button>
+            </div>
+            <div id="about-paragraphs"></div>
+            <div class="add-card" onclick="addParagraph()">+ добавить абзац</div>
+        </div>
+
+        <!-- PROJECTS -->
+        <div class="page" id="page-projects">
+            <div class="page-header">
+                <div class="page-title">Проекты</div>
+                <button class="btn btn-primary" onclick="saveSection('projects')">💾 Сохранить</button>
+            </div>
+            <div id="projects-list"></div>
+            <div class="add-card" onclick="addProject()">+ добавить проект</div>
+        </div>
+
+        <!-- FEATURED -->
+        <div class="page" id="page-featured">
+            <div class="page-header">
+                <div class="page-title">Где засветился?</div>
+                <button class="btn btn-primary" onclick="saveSection('featured')">💾 Сохранить</button>
+            </div>
+            <div id="featured-editor"></div>
+            <div class="add-card" onclick="addCategory()">+ добавить подраздел</div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal">
+    <div class="modal">
+        <div class="modal-title" id="modal-title">Редактировать</div>
+        <div id="modal-body"></div>
+        <div class="modal-footer">
+            <button class="btn btn-ghost" onclick="closeModal()">Отмена</button>
+            <button class="btn btn-primary" onclick="modalSave()">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let GH_TOKEN = '', GH_REPO = '', GH_BRANCH = 'main';
+let data = null;
+let modalCb = null;
+
+// ── AUTH ──
+async function login() {
+    GH_TOKEN = document.getElementById('token-input').value.trim();
+    GH_REPO = document.getElementById('repo-input').value.trim();
+    GH_BRANCH = document.getElementById('branch-input').value.trim() || 'main';
+    const err = document.getElementById('login-error');
+    err.style.display = 'none';
+
+    try {
+        const resp = await ghGet('content.json');
+        data = JSON.parse(atob(resp.content.replace(/\n/g,'')));
+        localStorage.setItem('admin_token', GH_TOKEN);
+        localStorage.setItem('admin_repo', GH_REPO);
+        localStorage.setItem('admin_branch', GH_BRANCH);
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('app').classList.add('show');
+        renderAll();
+    } catch(e) {
+        err.textContent = 'Ошибка: ' + (e.message || 'проверь токен и репо');
+        err.style.display = 'block';
+    }
+}
+
+// Auto-login from localStorage
+window.addEventListener('load', () => {
+    const t = localStorage.getItem('admin_token');
+    const r = localStorage.getItem('admin_repo');
+    const b = localStorage.getItem('admin_branch');
+    if (t && r) {
+        document.getElementById('token-input').value = t;
+        document.getElementById('repo-input').value = r;
+        document.getElementById('branch-input').value = b || 'main';
+        login();
+    }
+});
+
+// ── GITHUB API ──
+async function ghGet(path) {
+    const r = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`, {
+        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+}
+
+async function ghPut(path, content, message) {
+    const file = await ghGet(path);
+    const r = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`, {
+        method: 'PUT',
+        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(content))), sha: file.sha, branch: GH_BRANCH })
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+}
+
+// ── SAVE ──
+async function saveSection(section) {
+    collectData(section);
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = 'Сохраняю...';
+    try {
+        await ghPut('content.json', JSON.stringify(data, null, 2), `admin: update ${section}`);
+        toast('Сохранено ✓', 'success');
+    } catch(e) {
+        toast('Ошибка: ' + e.message, 'error');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '💾 Сохранить';
+}
+
+function collectData(section) {
+    if (section === 'hero') {
+        data.hero.title = document.getElementById('hero-title').value;
+        data.hero.subtitle = document.getElementById('hero-subtitle').value;
+        data.hero.buttons = Array.from(document.querySelectorAll('.hero-btn-row')).map(row => ({
+            text: row.querySelector('.hb-text').value,
+            url: row.querySelector('.hb-url').value,
+            style: row.querySelector('.hb-style').value
+        }));
+    }
+    if (section === 'about') {
+        data.about.paragraphs = Array.from(document.querySelectorAll('.about-para')).map(t => t.value);
+    }
+    if (section === 'projects') {
+        data.projects = Array.from(document.querySelectorAll('.proj-card-edit')).map(card => ({
+            emoji: card.querySelector('.pe-emoji').value,
+            name: card.querySelector('.pe-name').value,
+            desc: card.querySelector('.pe-desc').value,
+            tags: card.querySelector('.pe-tags-data').value.split(',').map(t=>t.trim()).filter(Boolean)
+        }));
+    }
+    if (section === 'featured') {
+        data.featured = Array.from(document.querySelectorAll('.feat-cat')).map(cat => ({
+            category: cat.querySelector('.fc-name').value,
+            items: Array.from(cat.querySelectorAll('.feat-item-row')).map(row => ({
+                source: row.querySelector('.fi-source').value,
+                title: row.querySelector('.fi-title').value,
+                desc: row.querySelector('.fi-desc').value,
+                url: row.querySelector('.fi-url').value
+            }))
+        }));
+    }
+}
+
+// ── RENDER ──
+function renderAll() {
+    renderHero();
+    renderAbout();
+    renderProjects();
+    renderFeatured();
+}
+
+function renderHero() {
+    document.getElementById('hero-title').value = data.hero.title;
+    document.getElementById('hero-subtitle').value = data.hero.subtitle;
+    const cont = document.getElementById('hero-buttons');
+    cont.innerHTML = data.hero.buttons.map((b, i) => heroBtnRow(b, i)).join('');
+}
+
+function heroBtnRow(b, i) {
+    return `<div class="card hero-btn-row">
+        <div class="card-header">
+            <div class="card-title">Кнопка ${i+1}</div>
+            <div class="card-actions"><button class="btn btn-danger btn-sm" onclick="this.closest('.hero-btn-row').remove()">✕</button></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 2fr 120px;gap:0.75rem;">
+            <div class="field" style="margin:0"><label>Текст</label><input type="text" class="hb-text" value="${esc(b.text)}"></div>
+            <div class="field" style="margin:0"><label>Ссылка</label><input type="url" class="hb-url" value="${esc(b.url)}"></div>
+            <div class="field" style="margin:0"><label>Стиль</label><select class="hb-style"><option value="solid"${b.style==='solid'?' selected':''}>Заливка</option><option value="outline"${b.style==='outline'?' selected':''}>Контур</option></select></div>
+        </div>
+    </div>`;
+}
+
+function addHeroButton() {
+    const cont = document.getElementById('hero-buttons');
+    const i = cont.querySelectorAll('.hero-btn-row').length;
+    cont.insertAdjacentHTML('beforeend', heroBtnRow({text:'', url:'', style:'outline'}, i));
+}
+
+function renderAbout() {
+    document.getElementById('about-paragraphs').innerHTML = data.about.paragraphs.map((p,i) =>
+        `<div class="card" style="position:relative">
+            <div class="card-header">
+                <div class="card-title">Абзац ${i+1}</div>
+                <button class="btn btn-danger btn-sm" onclick="this.closest('.card').remove()">✕</button>
+            </div>
+            <textarea class="about-para">${esc(p)}</textarea>
+            <div style="font-size:0.72rem;color:rgba(255,255,255,0.3);margin-top:0.4rem;">Можно использовать &lt;strong&gt;текст&lt;/strong&gt; для выделения</div>
+        </div>`
+    ).join('');
+}
+
+function addParagraph() {
+    document.getElementById('about-paragraphs').insertAdjacentHTML('beforeend',
+        `<div class="card">
+            <div class="card-header"><div class="card-title">Новый абзац</div><button class="btn btn-danger btn-sm" onclick="this.closest('.card').remove()">✕</button></div>
+            <textarea class="about-para" placeholder="Текст абзаца..."></textarea>
+        </div>`
+    );
+}
+
+function renderProjects() {
+    document.getElementById('projects-list').innerHTML = data.projects.map((p,i) => projectCard(p,i)).join('');
+}
+
+function projectCard(p, i) {
+    return `<div class="card proj-card-edit" draggable="true">
+        <div class="card-header">
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+                <input type="text" class="pe-emoji" value="${esc(p.emoji)}" style="width:50px;text-align:center;font-size:1.2rem;">
+                <input type="text" class="pe-name" value="${esc(p.name)}" style="font-weight:500;">
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="this.closest('.card').remove()">✕</button>
+        </div>
+        <div class="field"><label>Описание</label><textarea class="pe-desc">${esc(p.desc)}</textarea></div>
+        <div class="field">
+            <label>Теги (через запятую)</label>
+            <input type="text" class="pe-tags-data" value="${p.tags.join(', ')}">
+        </div>
+    </div>`;
+}
+
+function addProject() {
+    document.getElementById('projects-list').insertAdjacentHTML('beforeend', projectCard({emoji:'🔧', name:'', desc:'', tags:[]}, -1));
+}
+
+function renderFeatured() {
+    document.getElementById('featured-editor').innerHTML = data.featured.map((cat, ci) => featCatBlock(cat, ci)).join('');
+}
+
+function featCatBlock(cat, ci) {
+    return `<div class="card feat-cat" style="margin-bottom:1.25rem;">
+        <div class="card-header">
+            <div style="flex:1;">
+                <label style="margin-bottom:0.25rem;">Название подраздела</label>
+                <input type="text" class="fc-name" value="${esc(cat.category)}">
+            </div>
+            <button class="btn btn-danger btn-sm" onclick="this.closest('.feat-cat').remove()" style="margin-left:0.75rem;margin-top:1.2rem;">✕</button>
+        </div>
+        <div class="feat-items">${cat.items.map(item => featItemRow(item)).join('')}</div>
+        <div class="add-card" style="margin:0.5rem 0 0;" onclick="addFeatItem(this)">+ добавить упоминание</div>
+    </div>`;
+}
+
+function featItemRow(item) {
+    return `<div class="card feat-item-row" style="background:#13131a;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+            <div style="font-size:0.8rem;font-weight:500;color:rgba(255,255,255,0.5);">Упоминание</div>
+            <button class="btn btn-danger btn-sm" onclick="this.closest('.feat-item-row').remove()">✕</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+            <div class="field" style="margin:0"><label>Источник</label><input type="text" class="fi-source" value="${esc(item.source)}" placeholder="kuzstu.ru · 2025"></div>
+            <div class="field" style="margin:0"><label>URL</label><input type="url" class="fi-url" value="${esc(item.url)}"></div>
+        </div>
+        <div class="field" style="margin-top:0.75rem;margin-bottom:0;"><label>Заголовок</label><input type="text" class="fi-title" value="${esc(item.title)}"></div>
+        <div class="field" style="margin-top:0.75rem;margin-bottom:0;"><label>Описание</label><textarea class="fi-desc" style="min-height:55px;">${esc(item.desc)}</textarea></div>
+    </div>`;
+}
+
+function addFeatItem(btn) {
+    btn.previousElementSibling.insertAdjacentHTML('beforeend', featItemRow({source:'', title:'', desc:'', url:''}));
+}
+
+function addCategory() {
+    document.getElementById('featured-editor').insertAdjacentHTML('beforeend',
+        featCatBlock({ category: 'Новый подраздел', items: [] }, -1)
+    );
+}
+
+// ── UI HELPERS ──
+function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+function toast(msg, type='success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast ' + type + ' show';
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('show'); }
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+</body>
+</html>

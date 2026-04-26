@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div id="in-page-channel-node-id" data-channel-name="in_page_channel_-bR2LH"></div>
-    
-    <title>Немков Иван</title>
-    <meta name="description" content="Привет! 
-Волонтер, вебмастер.
-Школьник с знанием HTML и CSS.
-">
-    <!--<base href="/">--><!--<base href=".">--><base href=".">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Немков Иван</title>
+    <meta name="description" content="Студент КузГТУ. Волонтер, вебмастер, амбассадор Goodline.">
+    <base href=".">
     <link rel="icon" type="image/x-icon" href="https://teletype.link/dist/assets/favicon.png">
-
-
-    <link href="./ivan_files/static.css" rel="stylesheet">
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
    ym(94608759, "init", {
         clickmap:true,
         trackLinks:true,
@@ -27,56 +21,343 @@
         webvisor:true
    });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/94608759" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/94608759" style="position:absolute; left:-9999px;" alt=""></div></noscript>
 <!-- /Yandex.Metrika counter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<div class="main-container">
-            <div class="promo-link">
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">тык сюда</a>
-            <a href="/privacy" target="_blank">Политика конфиденциальности</a>
-        </div>
-        <div class="background-container">
-        <div class="custom-image-container">
-            <img src="./ivan_files/bck.png">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: #111;
+            color: #f0ece4;
+            font-family: 'Onest', sans-serif;
+            font-weight: 300;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            display: flex;
+            align-items: flex-end;
+            padding: clamp(2rem, 6vw, 4rem);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('./ivan_files/bck.webp') center 20% / cover no-repeat;
+            filter: brightness(0.35);
+        }
+
+        .hero-fade {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #111 0%, #111 10%, transparent 55%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 640px;
+        }
+
+        .hero-name {
+            font-family: 'Onest', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-sub {
+            font-size: 0.9rem;
+            color: rgba(240,236,228,0.55);
+            line-height: 1.7;
+            max-width: 380px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-family: 'Onest', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            padding: 0.6rem 1.25rem;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.2s;
+            letter-spacing: 0.01em;
+        }
+        .btn-solid {
+            background: #f0ece4;
+            color: #111;
+        }
+        .btn-solid:hover { background: #fff; }
+        .btn-outline {
+            border: 1px solid rgba(240,236,228,0.25);
+            color: rgba(240,236,228,0.75);
+        }
+        .btn-outline:hover {
+            border-color: rgba(240,236,228,0.6);
+            color: #f0ece4;
+        }
+
+        /* ─── SECTIONS ─── */
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: clamp(3rem, 8vw, 5rem) clamp(1.5rem, 6vw, 4rem);
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #c9a96e;
+            margin-bottom: 2rem;
+        }
+
+        /* ─── ABOUT ─── */
+        .about-wrap { border-top: 1px solid rgba(240,236,228,0.08); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        @media (max-width: 500px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        .avatar-ring {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(135deg, #c9a96e, #8a6a3a);
+        }
+        .avatar-ring img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 2px solid #111;
+        }
+
+        .about-body p {
+            font-size: 0.92rem;
+            color: rgba(240,236,228,0.6);
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+        .about-body p:last-child { margin-bottom: 0; }
+        .about-body strong { color: #f0ece4; font-weight: 500; }
+
+        /* ─── PROJECTS ─── */
+        .projects-wrap { border-top: 1px solid rgba(240,236,228,0.08); }
+
+        .proj-list { display: flex; flex-direction: column; gap: 1px; }
+
+        .proj-item {
+            display: grid;
+            grid-template-columns: 2.5rem 1fr auto;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(240,236,228,0.06);
+            transition: background 0.15s;
+        }
+
+        .proj-emoji { font-size: 1.4rem; text-align: center; }
+
+        .proj-info {}
+        .proj-name {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #f0ece4;
+            margin-bottom: 0.2rem;
+        }
+        .proj-desc {
+            font-size: 0.78rem;
+            color: rgba(240,236,228,0.4);
+            line-height: 1.5;
+        }
+
+        .proj-tags {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .proj-tag {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 100px;
+            border: 1px solid rgba(240,236,228,0.12);
+            color: rgba(240,236,228,0.4);
+            white-space: nowrap;
+        }
+        @media (max-width: 480px) {
+            .proj-item { grid-template-columns: 2rem 1fr; }
+            .proj-tags { display: none; }
+        }
+
+        /* ─── FOOTER ─── */
+        .footer {
+            border-top: 1px solid rgba(240,236,228,0.08);
+            padding: 2rem clamp(1.5rem, 6vw, 4rem);
+            max-width: 640px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(240,236,228,0.25);
+        }
+        .footer-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .footer-links a {
+            font-size: 0.75rem;
+            color: rgba(240,236,228,0.25);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .footer-links a:hover { color: rgba(240,236,228,0.6); }
+
+        /* ─── REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.on { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-fade"></div>
+    <div class="hero-content">
+        <h1 class="hero-name">Студент. Разработчик.<br>Волонтёр.</h1>
+        <p class="hero-sub">
+            Студент КузГТУ. Пишу ботов, поднимаю серверы, волонтёрю.
+            Амбассадор Goodline.
+        </p>
+        <div class="hero-links">
+            <a href="https://t.me/nemkofff" target="_blank" class="btn btn-solid">Блог в ТГ</a>
+            <a href="https://t.me/iamnemkofff" target="_blank" class="btn btn-outline">Написать</a>
+            <a href="https://vk.com/id215468423" target="_blank" class="btn btn-outline">ВКонтакте</a>
         </div>
     </div>
-    <div class="card-container avatar-large font-pt-graphik">
-        <div class="card">
-            <div class="card-avatar avatar-size-large">
-                <img src="./ivan_files/577715e8d97299d466eb8061c0c4edc0.jpg" title="Немков Иван" alt="Немков Иван">
+</section>
+
+<div class="about-wrap">
+    <div class="wrap">
+        <p class="section-label reveal">О себе</p>
+        <div class="about-grid reveal">
+            <div class="avatar-ring">
+                <img src="./ivan_files/avatar.webp" alt="Немков Иван">
             </div>
-            <div class="card-name">Немков Иван</div>
-            <div class="card-description">
-                Привет! 
-<br>Студент института профессионального образования Кузбасского государственного технического университета им Т.Ф.Горбачева
-<br>Знаю HTML и CSS. Волонтер, вебмастер.
-<br>Амбассадор Goodline. Если есть вопросы - телеграм ниже по кнопкам)
-<br>            </div>
-                            <div class="card-main-button">
-                    <a href="https://t.me/nemkofff" target="_blank" style="background-color: #000; color: #fff;">
-                        Блог в ТГ                    </a>
-                </div>
-            
-            <div class="card-buttons-container">
-                
-                <div class="buttons-row justify-center">
-                    
-                    <div class="button-container">
-                        <a style="background: #000; color: #fff" href="https://vk.com/id215468423" class="messenger-button vk mono"> <i class="font-icon-vk"></i> </a>
-                        <span>ВКонтакте</span>
-                    </div>
-                
-                    <div class="button-container">
-                        <a style="background: #000; color: #fff" href="https://t.me/iamnemkofff" class="messenger-button telegram mono"> <i class="font-icon-telegram"></i> </a>
-                        <span>Телеграм</span>
-                    </div>
-                
-                </div>
-                        </div>
-
-
+            <div class="about-body">
+                <p>Студент <strong>института профессионального образования КузГТУ им. Т.Ф. Горбачева</strong>, направление — информационные системы и программирование.</p>
+                <p>Занимаюсь backend-разработкой: пишу ботов для Telegram и ВКонтакте, разворачиваю серверы, настраиваю проксирование и SSL. Участвовал в региональных хакатонах.</p>
+                <p>Параллельно волонтёрю и являюсь <strong>амбассадором Goodline</strong>.</p>
+            </div>
+        </div>
     </div>
 </div>
-<script type="text/javascript" src="./ivan_files/static.js"></script>
 
-</div></body></html>
+<div class="projects-wrap">
+    <div class="wrap">
+        <p class="section-label reveal">Проекты</p>
+        <div class="proj-list">
+            <div class="proj-item reveal">
+                <div class="proj-emoji">🤖</div>
+                <div class="proj-info">
+                    <div class="proj-name">Навигатор КузГТУ</div>
+                    <div class="proj-desc">ВК-бот для абитуриентов и студентов — мониторинг рейтинговых списков и уведомления об изменениях в расписании пар в реальном времени</div>
+                </div>
+                <div class="proj-tags">
+                    <span class="proj-tag">Python</span>
+                    <span class="proj-tag">vk-api</span>
+                    <span class="proj-tag">PyMuPDF</span>
+                </div>
+            </div>
+            <div class="proj-item reveal">
+                <div class="proj-emoji">💼</div>
+                <div class="proj-info">
+                    <div class="proj-name">Карьерный бот</div>
+                    <div class="proj-desc">Хакатон-проект: Telegram-бот для профориентации с поиском вакансий через hh.ru и подбором курсов</div>
+                </div>
+                <div class="proj-tags">
+                    <span class="proj-tag">aiogram</span>
+                    <span class="proj-tag">GigaChat</span>
+                    <span class="proj-tag">hh.ru API</span>
+                </div>
+            </div>
+            <div class="proj-item reveal">
+                <div class="proj-emoji">🔐</div>
+                <div class="proj-info">
+                    <div class="proj-name">Сисадминство</div>
+                    <div class="proj-desc">Свой VPS: настройка сервисов, SSL, проксирование, мониторинг — в общем всё что нужно чтоб работало</div>
+                </div>
+                <div class="proj-tags">
+                    <span class="proj-tag">Linux</span>
+                    <span class="proj-tag">3X-UI</span>
+                    <span class="proj-tag">Cloudflare</span>
+                </div>
+            </div>
+            <div class="proj-item reveal">
+                <div class="proj-emoji">🌐</div>
+                <div class="proj-info">
+                    <div class="proj-name">Этот сайт</div>
+                    <div class="proj-desc">Ну вот он. GitHub Pages, Cloudflare, завайбкоден(мог бы и сам, но ладно)</div>
+                </div>
+                <div class="proj-tags">
+                    <span class="proj-tag">HTML</span>
+                    <span class="proj-tag">CSS</span>
+                    <span class="proj-tag">GitHub Pages</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <span class="footer-copy">© 2025 Немков Иван</span>
+    <div class="footer-links">
+        <a href="/privacy">Конфиденциальность</a>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">тык сюда</a>
+    </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

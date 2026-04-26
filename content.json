@@ -4,7 +4,7 @@
     "subtitle": "ÃÂ¡ÃÂÃÂÃÂ´ÃÂµÃÂ½ÃÂ ÃÂÃÂÃÂ·ÃÂÃÂ¢ÃÂ£. ÃÂÃÂ¸ÃÂÃÂ ÃÂ±ÃÂ¾ÃÂÃÂ¾ÃÂ², ÃÂ¿ÃÂ¾ÃÂ´ÃÂ½ÃÂ¸ÃÂ¼ÃÂ°ÃÂ ÃÂÃÂµÃÂÃÂ²ÃÂµÃÂÃÂ, ÃÂ²ÃÂ¾ÃÂ»ÃÂ¾ÃÂ½ÃÂÃÂÃÂÃÂ. ÃÂÃÂ¼ÃÂ±ÃÂ°ÃÂÃÂÃÂ°ÃÂ´ÃÂ¾ÃÂ Goodline.",
     "buttons": [
       {
-        "text": "ÃÂÃÂ»ÃÂ¾ÃÂ³ ÃÂ² ÃÂ¢ÃÂ",
+        "text": "afsfas",
         "url": "https://t.me/nemkofff",
         "style": "solid"
       },
@@ -92,6 +92,10 @@
           "url": "https://kuzstu.ru/news/8963/pobedy-i-prizovye-mesta-instituta-professionalnogo-obrazovaniya-na-olimpiade-tehnovyzov/"
         }
       ]
+    },
+    {
+      "category": "Новый подраздел",
+      "items": []
     }
   ]
 }
